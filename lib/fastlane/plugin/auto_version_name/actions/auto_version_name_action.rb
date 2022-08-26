@@ -5,11 +5,11 @@ module Fastlane
   module Actions
     class AutoVersionNameAction < Action
       def self.run(params)
-        def version_string_to_array(version_string)
+        def self.version_string_to_array(version_string)
           return version_string.split('.').map { |value| value.to_i }
         end
 
-        def get_greater_array(array1, array2, array3)
+        def self.get_greater_array(array1, array2, array3)
           greater = []
 
           for i in 0..2
