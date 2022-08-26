@@ -54,7 +54,7 @@ module Fastlane
         # iOS version array
         if (is_ios_defined)
           ios_api_key = params[:ios_api_key]
-          app_store_build_number(api_key: ios_api_key, live: true)  
+          Actions.app_store_build_number(api_key: ios_api_key, live: true)  
           ios_version_string = lane_context[SharedValues::LATEST_VERSION]
           ios_version_array = version_string_to_array(ios_version_string)
         end
@@ -62,7 +62,7 @@ module Fastlane
         # Android version array
         if (is_android_defined)
           android_json_key = params[:android_json_key_path]
-          android_version_string = google_play_track_release_names(json_key: android_json_key).first
+          android_version_string = Actions.google_play_track_release_names(json_key: android_json_key).first
           android_version_array = version_string_to_array(android_version_string)
         end
         
