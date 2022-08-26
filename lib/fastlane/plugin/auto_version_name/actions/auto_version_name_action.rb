@@ -40,9 +40,9 @@ module Fastlane
         android_version_array = []
         final_version_array = []
         final_version_string = ""
-        is_file_defined = !defined?(params[:version_name_file_path]) ? true : false
-        is_ios_defined = !defined?(params[:ios_api_key]) ? true : false
-        is_android_defined = !defined?(params[:android_json_key_path]) ? true : false
+        is_file_defined = defined?(params[:version_name_file_path]) ? true : false
+        is_ios_defined = defined?(params[:ios_api_key]) ? true : false
+        is_android_defined = defined?(params[:android_json_key_path]) ? true : false
         
         # Minimal version array
         if (is_file_defined)
