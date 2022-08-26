@@ -136,11 +136,21 @@ module Fastlane
 
       def self.available_options
         [
-          # FastlaneCore::ConfigItem.new(key: :your_option,
-          #                         env_name: "AUTO_VERSION_NAME_YOUR_OPTION",
-          #                      description: "A description of your option",
-          #                         optional: false,
-          #                             type: String)
+          FastlaneCore::ConfigItem.new(key: :version_name_file_path,
+                                  env_name: "VERSION_NAME_FILE_PATH",
+                               description: "The destination to version_name file",
+                                  optional: true,
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :ios_api_key,
+                                  env_name: "IOS_API_KEY",
+                               description: "The App Store Connect API key information used for authorization requests",
+                                  optional: true,
+                                      type: Hash),
+          FastlaneCore::ConfigItem.new(key: :android_json_key_path,
+                                  env_name: "ANDROID_JSON_KEY_PATH",
+                               description: "The path to a file containing service account JSON, used to authenticate with Google",
+                                  optional: true,
+                                      type: String)
         ]
       end
 
