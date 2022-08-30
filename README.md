@@ -32,8 +32,15 @@ Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plu
 ```ruby
 platform :android do
   # [...]
+  root_directory = `cd ../.. && pwd`.chomp
+
+  package_name = "your.package.name"
+
   def get_live_version() # METHOD
-    return google_play_track_release_names().first 
+    return google_play_track_release_names(
+      json_key: "#{root_directory}/android/google-play-key.json",
+      package_name: package_name
+    ).first
     # main method returns an array by default. ["1.0.0"] => "1.0.0"
   end
   # [...]
@@ -100,10 +107,10 @@ platform :android do
     # [...]
     root_directory = `cd ../.. && pwd`.chomp
 
-    ios_lane = import("../../ios/fastlane/Fastfile")
+    ios_lane = import("#{root_directory}/ios/fastlane/Fastfile")
 
     version = auto_version_name(
-      minimal_version_string: File.open("#{root_directory}/version_name").read.chomp,
+      minimal_version: File.open("#{root_directory}/version_name").read.chomp,
       android_live_version: get_live_version(),
       ios_live_version: ios_lane.runner.execute("live_version_name", "ios"),
       # IMPORTANT: if your version lanes have the same name, you need to especify the platform on execute
@@ -132,7 +139,7 @@ platform :ios do
     android_lane = import("#{root_directory}/android/fastlane/Fastfile")
 
     version = auto_version_name(
-      minimal_version_string: File.open("#{root_directory}/version_name").read.chomp,
+      minimal_version: File.open("#{root_directory}/version_name").read.chomp,
       ios_live_version: get_live_version(),
       android_live_version: android_lane.runner.execute("live_version_name", "android"),
       # IMPORTANT: if your version lanes have the same name, you need to especify the platform on execute
