@@ -1,3 +1,9 @@
 lane :test do
-  auto_version_name
+  new_version_name = auto_version_name(
+    minimal_version: "1.0.0",
+    android_live_version: "1.1.0",
+    ios_live_version: "1.2.0",
+  )
+
+  puts new_version_name
 end
