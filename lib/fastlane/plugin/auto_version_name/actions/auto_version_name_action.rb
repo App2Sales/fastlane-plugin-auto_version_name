@@ -80,9 +80,11 @@ module Fastlane
         
         greater_version_string = get_greater_version(
           minimal_version_string, ios_version_string, android_version_string
-        )        
+        )
+
+        are_all_equal = [minimal_version_string, ios_version_string, android_version_string].uniq.size <= 1
         
-        if (!has_any_live_version || greater_version_string == minimal_version_string)
+        if (!has_any_live_version || (!are_all_equal && greater_version_string == minimal_version_string))
           return minimal_version_string
         end
 
